@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta chartset="utf-8"/>
+    <title>opener demo page</title>
+    <style type="text/css">
+    .open-btn{
+      width: 250px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #ccc;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+      margin: 20px auto;
+    }
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="opener.js"></script>
+  </head>
+  <body>
+    <div id="demo1" class="open-btn">onload callback</div>
+    <div id="demo2" class="open-btn">dom ready callback</div>
+    <div id="demo3" class="open-btn">setTimeout callback</div>
+    <script type="text/javascript">
+    (function(){
+      //bind demo1
+      $('#demo1').bind('click',function(){
+        var args = {};
+        opener.popup('onload',function(){
+
+        });
+      })
+      //bind demo2
+      $('#demo2').bind('click',function(){
+        var args = {};
+        opener.popup('onready',function(){
+
+        });
+      })
+      //bind demo3
+      $('demo3').bind('click',function(){
+        var args = {};
+        opener.popup(100,function(){
+
+        });
+      })
+    })(jQuery);
+    </script>
+  </body>
+</html>
