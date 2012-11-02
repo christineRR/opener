@@ -26,24 +26,27 @@
     (function(){
       //bind demo1
       $('#demo1').bind('click',function(){
-        var args = {};
-        opener.popup('onload',function(){
-
-        });
+        var args = {
+          url : 'popup.html',
+          type : 'onload'
+        };
+        opener.popup(args);
       })
       //bind demo2
       $('#demo2').bind('click',function(){
-        var args = {};
-        opener.popup('onready',function(){
-
-        });
-      })
+        var args = {
+          url : 'popup.html',
+          type : 'onready'
+        };
+        opener.popup(args);
+      });
       //bind demo3
-      $('demo3').bind('click',function(){
-        var args = {};
-        opener.popup(100,function(){
-
-        });
+      $('#demo3').bind('click',function(){
+        var args = {
+          url : 'popup.html',
+          type : 1000
+        };
+        opener.popup(args);
       })
     })(jQuery);
     </script>

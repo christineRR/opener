@@ -1,23 +1,45 @@
 var opener = {
+  defaultOptions : {
+    url : '',
+    type : null,
+    name : '',
+    features : 'fullscreen=yes, scrollbars=yes'
+  },
   win : null,
   popup : function(args){
-    if(arguments.length !== 2) return;
-    var first = arguments[0];
-    var callback = arguments[1];
-    var type = typeof first;
+    var options = arguments[0];
+    options = $.extend(true,this.defaultOptions,options)
+    this.win = window.open(options.url,options.name,options.features);  
+
+    var type = typeof(options.type);
     if(type === 'number'){
-      this.popupTimer(first,callback);
+      this.popupTimer(options.type);
     }else if(type === 'string'){
-      if(first === 'onload'){
-        this.popupOnload(callback);
+      if(type === 'onload'){
+        this.popupOnload();
       }else{
-        this.popupOnready(callback);
+        this.popupOnready();
       }
     }else{
       return;
     }
   },
-  popupTimer : function(time,callback){
-    
+  popupTimer : function(time){
+    var self = this;
+    setTimeout(function(){
+      self.win.alert(time)
+    },time);
+  },
+  popupOnload : function(){
+    this.win.onload = this.callback;
+  },
+  popupOnready : function(){
+    var self = this;
+    $(this.win.document).ready(function($){
+      self.callback();
+    });
+  },
+  callback : function(){
+    this.win.alert('callback');
   }
 }
